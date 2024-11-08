@@ -29,3 +29,14 @@ fig = px.scatter(
     labels={"RA": "Right Ascension (Degrees)", "Dec": "Declination (Degrees)", "Redshift": "Redshift"}
 )
 st.plotly_chart(fig)
+# Redshift range filter
+min_redshift, max_redshift = st.sidebar.slider(
+    "Select Redshift Range",
+    min_value=float(data["Redshift"].min()),
+    max_value=float(data["Redshift"].max()),
+    value=(float(data["Redshift"].min()), float(data["Redshift"].max()))
+)
+
+# Filter the data based on the selected redshift range
+filtered_data = data[(data["Redshift"] >= min_redshift) & (data["Redshift"] <= max_redshift)]
+
