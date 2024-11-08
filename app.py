@@ -14,3 +14,18 @@ except Exception as e:
 # Display the first few rows of the CSV file
 st.write("Preview of the Data:")
 st.dataframe(data.head())
+import plotly.express as px
+
+# Scatter plot of the data
+st.subheader("Galaxy Distribution Scatter Plot")
+fig = px.scatter(
+    data,
+    x="RA",
+    y="Dec",
+    color="Redshift",
+    color_continuous_scale="Viridis",
+    hover_data=["Galaxy_ID", "Redshift"],
+    title="Galaxy Distribution with Redshift Coloring",
+    labels={"RA": "Right Ascension (Degrees)", "Dec": "Declination (Degrees)", "Redshift": "Redshift"}
+)
+st.plotly_chart(fig)
